@@ -1,9 +1,10 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { FaSearch, FaShoppingCart, FaLeaf } from 'react-icons/fa';
-import styled from 'styled-components';
 import plant1 from '../assets/images/plant1.png';
 import plant2 from '../assets/images/plant2.png';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Header = () => {
   const settings = {
@@ -65,17 +66,19 @@ const Header = () => {
         <div className="container mx-auto py-16 px-6">
           <Slider {...settings}>
             {slides.map((slide, index) => (
-              <Slide key={index}>
-                <SlideText>
-                  <h1>{slide.title}</h1>
-                  <p>{slide.description}</p>
-                  <button>Shop Now</button>
-                </SlideText>
-                <SlideImages>
-                  <img src={slide.images[0]} alt={`Slide ${index + 1} Large`} className="large-image" />
-                  <img src={slide.images[1]} alt={`Slide ${index + 1} Small`} className="small-image" />
-                </SlideImages>
-              </Slide>
+              <div key={index} className="flex items-center justify-between p-8">
+                <div className="flex-1 pr-8">
+                  <h1 className="text-3xl font-bold mb-4">{slide.title}</h1>
+                  <p className="text-lg mb-8">{slide.description}</p>
+                  <button className="bg-green-500 text-white px-4 py-2 rounded">Shop Now</button>
+                </div>
+                <div className="flex-1 flex justify-center items-center">
+                  <div className="flex items-end">
+                    <img src={slide.images[0]} alt={`Slide ${index + 1} Large`} className="w-2/3 mb-4" />
+                    <img src={slide.images[1]} alt={`Slide ${index + 1} Small`} className="w-1/3 ml-4 mb-4" />
+                  </div>
+                </div>
+              </div>
             ))}
           </Slider>
         </div>
@@ -83,54 +86,5 @@ const Header = () => {
     </>
   );
 };
-
-const Slide = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem;
-`;
-
-const SlideText = styled.div`
-  flex: 1;
-  padding-right: 2rem;
-
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-  }
-
-  button {
-    background-color: #38a169;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-  }
-`;
-
-const SlideImages = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
-  .large-image {
-    max-width: 70%;
-    height: auto;
-    margin-bottom: 1rem;
-  }
-
-  .small-image {
-    max-width: 30%;
-    height: auto;
-  }
-`;
 
 export default Header;
